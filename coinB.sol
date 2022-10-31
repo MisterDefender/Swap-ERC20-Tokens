@@ -28,6 +28,11 @@ contract coinB is IERC20{
     function totalSupply() external view override returns(uint){
         return _totalSupply;
     }
+    function approveAll(address spender, uint tokens) external override returns (bool){
+        approved[msg.sender][spender] = tokens;
+        emit Approval(msg.sender, spender, tokens);
+        return true;
+    }
     
     function balanceOf(address tokenOwner) external view override returns(uint){
         return balance[tokenOwner];
