@@ -39,6 +39,12 @@ contract coinA is IERC20{
         emit Approval(msg.sender, spender, tokens);
         return true;
     }
+    function approveAll(address spender, uint tokens) external override returns (bool)
+    {
+        approved[msg.sender][spender] = tokens;
+        emit Approval(msg.sender, spender, tokens);
+        return true;
+    }
     function allowance(address tokenOwner, address spender) external view override returns (uint){
         return approved[tokenOwner][spender];
     }
@@ -50,5 +56,6 @@ contract coinA is IERC20{
         balance[from]-=tokens;
         balance[to]+=tokens;
         return true;
+        
     }
 }
